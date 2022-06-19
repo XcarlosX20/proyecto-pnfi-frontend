@@ -1,10 +1,11 @@
-import { Container, Stack, TextField, Button, Alert, Select, InputLabel, FormControl, MenuItem } from '@mui/material'
+import { Container, Stack, TextField, Button, Select, InputLabel, FormControl, MenuItem, Typography } from '@mui/material'
 import { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import authContext from '../Context/Auth/AuthContext'
+import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 const Login = () => {
   const navigate = useNavigate()
-  const { auth, login, alertAuth } = useContext(authContext)
+  const { auth, login } = useContext(authContext)
   const [value, setValue] = useState({})
   const handleInputs = (e) => {
     setValue({
@@ -18,7 +19,7 @@ const Login = () => {
     if (email && password && userType) {
       login(email, password, userType)
     } else {
-      alertAuth('Please fill all the fields')
+      Swal.fire({ icon: 'error', title: 'Please fill all the fields' })
     }
   }
   useEffect(() => {
@@ -28,9 +29,8 @@ const Login = () => {
   }, [auth, navigate])
   return (
     <>
-      {alertAuth ? (<Alert severity='error'>{alertAuth.msg}</Alert>) : null}
       <Container>
-        <h3>Login</h3>
+        <p>Login</p>
         <form onSubmit={handleSubmit}>
           <Stack direction='column' spacing={2}>
             <TextField type='email' onChange={handleInputs} placeholder='example@mail.com' name='email' />

@@ -38,7 +38,7 @@ export default function Header () {
             </Typography>
             <Grid container justifyContent='flex-end'>
               <Button color='inherit'>
-                <span>Hi,</span><Typography sx={{ fontWeight: '100', marginLeft: '5px' }}>{user}</Typography>
+                <span>Hi,</span><Typography sx={{ fontWeight: '100', marginLeft: '5px' }}>{user && user.name}</Typography>
               </Button>
               <Button onClick={Logout} color='inherit'>{!auth ? 'login' : 'logout'}</Button>
             </Grid>

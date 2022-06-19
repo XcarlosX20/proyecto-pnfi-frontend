@@ -3,6 +3,7 @@ import { clientAxios, tokenAuth } from '../../Axios'
 import { GET_USER_SUCCESS, GET_USER_START, GET_USER_ERROR, LOGIN_SUCCESS, REGISTER_SUCCESS, LOGIN_ERROR, REGISTER_ERROR, LOGOUT } from '../../Types'
 import authContext from './AuthContext'
 import { AuthReducer } from './AuthReducer'
+import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 const AuthState = ({ children }) => {
   const initialState = {
     auth: null,
@@ -14,18 +15,20 @@ const AuthState = ({ children }) => {
   }
   const [state, dispatch] = useReducer(AuthReducer, initialState)
   // fx
-  const registerUser = async (name, email, password) => {
+  const registerUser = async (user) => {
+    const { name, email, password, userType } = user
     try {
-      const response = await clientAxios.post('/api/teachers', { name, email, password })
+      const response = await clientAxios.post(`/api/${userType}/`, { name, email, password })
       const token = response.data.token
-      dispatch({ type: REGISTER_SUCCESS, payload: token })
-      getUser(token)
+      dispatch({ type: REGISTER_SUCCESS, payload: { token, userType } })
+      getUser(token, userType)
     } catch (error) {
       const alert = {
-        msg: error.response.data.msg,
+        msg: error.response.data.msg || 'Something went wrong',
         category: 'alert-error'
       }
       dispatch({ type: REGISTER_ERROR, payload: alert })
+      Swal.fire({ icon: 'error', title: alert.msg })
     }
   }
   const getUser = async (token, userType) => {
@@ -47,6 +50,7 @@ const AuthState = ({ children }) => {
         category: 'alert-error'
       }
       dispatch({ type: LOGIN_ERROR, payload: alert })
+      Swal.fire({ icon: 'error', title: alert.msg })
     }
   }
   const login = async (email, password, userType) => {
@@ -67,6 +71,7 @@ const AuthState = ({ children }) => {
         category: 'alert-error'
       }
       dispatch({ type: LOGIN_ERROR, payload: alert })
+      Swal.fire({ icon: 'error', title: alert.msg })
     }
   }
   const logout = () => {
