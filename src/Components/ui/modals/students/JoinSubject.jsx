@@ -27,7 +27,7 @@ const JoinSubject = () => {
               <TextField
                 label='code of subject'
               />
-              <Button variant='contained'>join</Button>
+              <Button color="success" variant='contained'>join</Button>
             </Stack>
           </form>
         </Container>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import NewSubject from '../../ui/modals/teachers/NewSubject'
-import Subjects from '../../ui/modals/teachers/Subjects'
+import Subjects from './Subjects'
 const Teachers = () => {
   return (
     <>

@@ -8,7 +8,7 @@ const AuthState = ({ children }) => {
   const initialState = {
     auth: null,
     token: localStorage.getItem('token'),
-    user: null,
+    user: { _id: '', name: '', email: '' },
     userType: localStorage.getItem('user-type'),
     alertAuth: null,
     loading: false

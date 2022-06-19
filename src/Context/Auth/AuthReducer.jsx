@@ -23,7 +23,10 @@ export const AuthReducer = (state, action) => {
     case REGISTER_ERROR:
       localStorage.clear()
       return {
-        alertAuth: action.payload || null, user: null, auth: null, token: null
+        alertAuth: action.payload || null,
+        auth: null,
+        token: null,
+        user: { _id: '', name: '', email: '' }
       }
 
     default:

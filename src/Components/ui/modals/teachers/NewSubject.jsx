@@ -51,7 +51,7 @@ const ModalTeacher = () => {
                 {...register('grade')}
               />
               {state.loading && <Typography textAlign='center' marginBottom={1}>Loading...</Typography>}
-              <Button disabled={state.loading} type='submit' variant='contained'>Create</Button>
+              <Button disabled={state.loading} color='success' type='submit' variant='contained'>Create</Button>
             </Stack>
           </form>
         </Container>
