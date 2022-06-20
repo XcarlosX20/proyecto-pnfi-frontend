@@ -11,7 +11,7 @@ import { Stack, Container, Grid } from '@mui/material'
 import AuthContext from '../../Context/Auth/AuthContext.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 export default function Header () {
-  const { user, auth, logout } = useContext(AuthContext)
+  const { user, auth, logout, userType } = useContext(AuthContext)
   const matches = useMediaQuery('(min-width:768px)')
   const navigate = useNavigate()
   const Logout = () => {
@@ -34,13 +34,13 @@ export default function Header () {
           </IconButton>
           <Grid container direction={matches ? 'row' : 'column'}>
             <Typography variant='h5'>
-            <Link to={'/home'}>
-              My Subjects
-            </Link>
+              <Link to='/home'>
+                My Subjects
+              </Link>
             </Typography>
             <Grid container justifyContent='flex-end'>
               <Button color='inherit'>
-                <span>Hi,</span><Typography sx={{ fontWeight: '100', marginLeft: '5px' }}>{user && user.name}</Typography>
+                <Typography sx={{ fontWeight: '100', marginLeft: '5px' }}>{user && userType && `${userType.slice(0,-1)}: ${user.name}`}</Typography>
               </Button>
               {auth
                 ? (<Button onClick={Logout} color='inherit'>logout</Button>)

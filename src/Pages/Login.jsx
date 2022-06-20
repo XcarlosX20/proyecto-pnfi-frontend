@@ -1,6 +1,6 @@
 import { Container, Stack, TextField, Button, Select, InputLabel, FormControl, MenuItem, Typography } from '@mui/material'
 import { useState, useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import authContext from '../Context/Auth/AuthContext'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
 const Login = () => {
@@ -30,7 +30,7 @@ const Login = () => {
   return (
     <>
       <Container>
-        <p>Login</p>
+        <h3>Log in</h3>
         <form onSubmit={handleSubmit}>
           <Stack direction='column' spacing={2}>
             <TextField type='email' onChange={handleInputs} placeholder='example@mail.com' name='email' />
@@ -50,7 +50,11 @@ const Login = () => {
               </Select>
             </FormControl>
           </Stack>
-          <Button sx={{ marginTop: '1rem' }} variant='contained' type='submit'>Login</Button>
+          <Stack sx={{ marginTop: '1rem' }} direction={"row"} spacing={2}>
+            <Button variant='contained' type='submit'>Login</Button>
+           <Button> <Link to={'/sign-in'}>Get an account</Link></Button>
+          </Stack>
+          
         </form>
       </Container>
     </>
