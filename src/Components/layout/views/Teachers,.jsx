@@ -5,8 +5,8 @@ import Subjects from './Subjects'
 const Teachers = () => {
   return (
     <>
-      <NewSubject />
       <Container>
+        <NewSubject />
         <Typography>Your subjects:</Typography>
         <Subjects />
       </Container>

@@ -3,8 +3,8 @@ import { Button, Container, Dialog, Stack, TextField, Typography } from '@mui/ma
 import authContext from '../../../../Context/Auth/AuthContext'
 import SubjectsContext from '../../../../Context/Subjects/SubjectsContext'
 const JoinSubject = () => {
-  const {user} = useContext(authContext)
-  const {JointoSubject} = useContext(SubjectsContext)
+  const { user } = useContext(authContext)
+  const { JointoSubject } = useContext(SubjectsContext)
   const [value, setValue] = useState('')
   const [openModal, setOpenModal] = useState(false)
   const createSubject = () => {
@@ -15,15 +15,15 @@ const JoinSubject = () => {
     }
   }
   const onSubmit = async (e) => {
-      e.preventDefault();
-      const data = new Map(Object.entries(user))
-      data.set('shortId', value)
-      data.delete('register')
-      data.delete('subjects')
-      JointoSubject(Object.fromEntries(data))
-      setValue('')
-      setOpenModal(false)
-    }
+    e.preventDefault()
+    const data = new Map(Object.entries(user))
+    data.set('shortId', value)
+    data.delete('register')
+    data.delete('subjects')
+    JointoSubject(Object.fromEntries(data))
+    setValue('')
+    setOpenModal(false)
+  }
   return (
     <>
       <Button onClick={createSubject}>
@@ -40,11 +40,11 @@ const JoinSubject = () => {
               direction='column'
             >
               <TextField
-              value={value}
-               onChange={(e) => setValue(e.target.value)}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
                 label='code of subject'
               />
-              <Button disabled={!value} type="submit" color='success' variant='contained'>join</Button>
+              <Button disabled={!value} type='submit' color='success' variant='contained'>join</Button>
             </Stack>
           </form>
         </Container>

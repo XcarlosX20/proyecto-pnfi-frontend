@@ -1,47 +1,32 @@
 import { useContext } from 'react'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { Stack, Container, Grid } from '@mui/material'
+import { Grid, AppBar, Toolbar, Typography, Button, Box } from '@mui/material'
 import AuthContext from '../../Context/Auth/AuthContext.jsx'
 import { Link, useNavigate } from 'react-router-dom'
+import SubjectsContext from '../../Context/Subjects/SubjectsContext.jsx'
 export default function Header () {
   const { user, auth, logout, userType } = useContext(AuthContext)
+  const { clearDataSubject } = useContext(SubjectsContext)
   const matches = useMediaQuery('(min-width:768px)')
   const navigate = useNavigate()
   const Logout = () => {
+    clearDataSubject()
     logout()
-    window.location = '/login'
+    navigate('/login')
   }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static'>
         <Toolbar>
-          <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Grid container direction={matches ? 'row' : 'column'}>
+          <Grid container padding={1} direction={matches ? 'row' : 'column'}>
             <Typography variant='h5'>
               <Link to='/home'>
-                My Subjects
+                My subjects
               </Link>
             </Typography>
             <Grid container justifyContent='flex-end'>
-              <Button color='inherit'>
-                <Typography sx={{ fontWeight: '100', marginLeft: '5px' }}>{user && userType && `${userType.slice(0,-1)}: ${user.name}`}</Typography>
-              </Button>
+              <Typography padding={1} sx={{ fontWeight: 'light', textTransform: 'capitalize' }}>{`${userType.slice(0, -1)}`} <b>{user && user.name}</b></Typography>
               {auth
                 ? (<Button onClick={Logout} color='inherit'>logout</Button>)
                 : (<Button onClick={Logout} color='inherit'>login</Button>)}

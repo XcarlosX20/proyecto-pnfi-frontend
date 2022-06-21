@@ -51,9 +51,9 @@ const SignIn = () => {
               </Select>
             </FormControl>
           </Stack>
-          <Stack sx={{ marginTop: '1rem' }} direction={"row"} spacing={2}>
+          <Stack sx={{ marginTop: '1rem' }} direction='row' spacing={2}>
             <Button variant='contained' type='submit'>Register</Button>
-           <Button><Link to={'/login'}>Login</Link></Button>
+            <Button><Link to='/login'>Login</Link></Button>
           </Stack>
         </form>
       </Container>
