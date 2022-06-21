@@ -7,6 +7,7 @@ import AuthState from './Context/Auth/AuthState'
 import { tokenAuth } from './Axios'
 import RequireAuth from './Context/Auth/RequireAuth.jsx'
 import SubjectsState from './Context/Subjects/SubjectsState.jsx'
+import QualificationsState from './Context/Qualifications/QualificationsState'
 const App = () => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -16,15 +17,17 @@ const App = () => {
     <>
       <AuthState>
         <SubjectsState>
-          <BrowserRouter>
-            <Routes>
-              <Route path='/' exact element={<p>home</p>} />
-              <Route path='/home' element={<RequireAuth><Home /></RequireAuth>} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/sign-in' element={<SignIn />} />
-              <Route path='/subjects/:_id' element={<Subject />} />
-            </Routes>
-          </BrowserRouter>
+          <QualificationsState>
+            <BrowserRouter>
+              <Routes>
+                <Route path='/' exact element={<p>home</p>} />
+                <Route path='/home' element={<RequireAuth><Home /></RequireAuth>} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/sign-in' element={<SignIn />} />
+                <Route path='/subjects/:_id' element={<Subject />} />
+              </Routes>
+            </BrowserRouter>
+          </QualificationsState>
         </SubjectsState>
       </AuthState>
     </>
