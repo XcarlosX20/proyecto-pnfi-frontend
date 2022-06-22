@@ -6,7 +6,7 @@ const Students = () => {
     <>
       <Container>
         <JoinSubject />
-        <Typography>Your subjects:</Typography>
+        <Typography p={2} variant='h6' textAlign='center'>Here's what you learning.</Typography>
         <Subjects />
       </Container>
     </>

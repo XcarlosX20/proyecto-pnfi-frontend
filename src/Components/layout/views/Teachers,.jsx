@@ -4,9 +4,9 @@ import Subjects from './Subjects'
 const Teachers = () => {
   return (
     <>
-      <Container sx={{paddingTop: '1rem'}}>
+      <Container sx={{ paddingTop: '1rem' }}>
         <NewSubject />
-        <Typography>Your subjects:</Typography>
+        <Typography p={2} variant='h6' textAlign='center'>Here's what you teaching.</Typography>
         <Subjects />
       </Container>
     </>

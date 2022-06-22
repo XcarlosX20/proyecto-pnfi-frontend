@@ -4,8 +4,12 @@ import { Grid, AppBar, Toolbar, Typography, Button, Box } from '@mui/material'
 import AuthContext from '../../Context/Auth/AuthContext.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 import SubjectsContext from '../../Context/Subjects/SubjectsContext.jsx'
+import BarLoader from '../ui/BarLoader.jsx'
+import QualificationsContext from '../../Context/Qualifications/QualificationsContext.jsx'
 export default function Header () {
   const { user, auth, logout, userType } = useContext(AuthContext)
+  const stateS = useContext(SubjectsContext)
+  const stateQ = useContext(QualificationsContext)
   const { clearDataSubject } = useContext(SubjectsContext)
   const matches = useMediaQuery('(min-width:768px)')
   const navigate = useNavigate()
@@ -20,7 +24,7 @@ export default function Header () {
       <AppBar position='static'>
         <Toolbar>
           <Grid container padding={1} direction={matches ? 'row' : 'column'}>
-            <Typography variant='h5'>
+            <Typography variant='h3'>
               <Link to='/home'>
                 My subjects
               </Link>
@@ -34,6 +38,9 @@ export default function Header () {
           </Grid>
         </Toolbar>
       </AppBar>
+      <Box sx={{ display: 'inline-block', width: '100%' }}>
+        {stateS.state.loading || stateQ.state.loading ? (<BarLoader />) : null}
+      </Box>
     </Box>
   )
 }

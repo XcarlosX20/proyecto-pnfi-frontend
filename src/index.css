@@ -17,3 +17,46 @@ table td, th {
   padding: 1rem;
   border: 1px solid #000;
 }
+.bar-loading {
+  animation: bar-loading 20s ease;
+  background-color: orange;
+  float: left;
+  height: 0.2rem;
+}
+@keyframes bar-loading {
+    0%{
+      width: 1%;
+      background-color: #DC681B;
+    }
+    10%{
+      background-color: #ff0000;
+    }
+    20%{
+      background-color: rgb(255, 238, 0);
+    }
+    30%{
+      background-color: #33ff00;
+    }
+    45%{
+      background-color: #00ffd5;
+    }
+    15%{
+     width: 90%;
+     background-color: rgb(0, 81, 255);
+    }
+    60%{
+      background-color: #6f00ff;
+    }
+    70%{
+      background-color: #f02bd6;
+    }
+    80%{
+      background-color: #f80000;
+    }
+    90%{
+      background-color: #F0932B;
+    }
+     100%{
+      width: 100%
+    }
+  }
