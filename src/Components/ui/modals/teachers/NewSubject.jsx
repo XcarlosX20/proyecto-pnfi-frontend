@@ -19,6 +19,8 @@ const ModalTeacher = () => {
     const data = new Map(Object.entries(d))
     if (!data.get('grade'))data.delete('grade')
     data.set('teacher', user._id)
+    data.set('teacherName', user.name)
+    data.set('teacherEmail', user.email)
     data.set('students', [])
     data.set('findStudent', [])
     await addSubject(Object.fromEntries(data))
