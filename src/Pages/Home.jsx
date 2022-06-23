@@ -1,8 +1,8 @@
 import Teachers from '../Components/layout/views/Teachers,'
-import Header from '../Components/layout/Header'
 import Students from '../Components/layout/views/Students'
 import { useContext } from 'react'
 import authContext from '../Context/Auth/AuthContext'
+import BasicLayout from '../Components/layout/BasicLayout'
 const Home = () => {
   const { userType } = useContext(authContext)
   let user
@@ -15,8 +15,9 @@ const Home = () => {
   }
   return (
     <>
-      <Header />
-      {user}
+      <BasicLayout>
+        {user}
+      </BasicLayout>
     </>
   )
 }

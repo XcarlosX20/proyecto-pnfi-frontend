@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button, Container, Dialog, Stack, TextField, Typography } from '@mui/material'
 import authContext from '../../../../Context/Auth/AuthContext'
@@ -45,11 +45,13 @@ const ModalTeacher = () => {
               <TextField
                 label='Name of subject'
                 {...register('name', { required: true })}
+                placeholder='Maths'
                 error={errors.name}
                 helperText={errors.name && 'This field is required'}
               />
               <TextField
                 label='degree of instruction'
+                placeholder='4th semester'
                 {...register('grade')}
               />
               {state.loading && <Typography textAlign='center' marginBottom={1}>Loading...</Typography>}

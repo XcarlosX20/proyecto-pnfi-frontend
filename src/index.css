@@ -7,6 +7,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+#root{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 a {
   text-decoration: none;
   color: unset;
@@ -22,6 +27,9 @@ table td, th {
   background-color: orange;
   float: left;
   height: 0.2rem;
+}
+footer{
+   margin-top: auto;
 }
 @keyframes bar-loading {
     0%{

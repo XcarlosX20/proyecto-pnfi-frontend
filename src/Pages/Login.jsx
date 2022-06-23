@@ -1,49 +1,41 @@
 import { Container, Stack, TextField, Button, Select, InputLabel, FormControl, MenuItem, Typography } from '@mui/material'
-import { useState, useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import authContext from '../Context/Auth/AuthContext'
-import Swal from 'sweetalert2/dist/sweetalert2.all.js'
+import { useForm } from 'react-hook-form'
 const Login = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm()
   const navigate = useNavigate()
   const { auth, login } = useContext(authContext)
-  const [value, setValue] = useState({})
-  const handleInputs = (e) => {
-    setValue({
-      ...value,
-      [e.target.name]: e.target.value
-    })
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const { email, password, userType } = value
-    if (email && password && userType) {
-      login(email, password, userType)
-    } else {
-      Swal.fire({ icon: 'error', title: 'Please fill all the fields' })
-    }
-  }
   useEffect(() => {
     if (auth) {
       navigate('/home', { replace: true })
     }
   }, [auth, navigate])
+  const onSubmit = (data) => {
+    const { email, password, userType } = data
+    login(email, password, userType)
+  }
   return (
     <>
       <Container>
         <h3>Log in</h3>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Stack direction='column' spacing={2}>
-            <TextField type='email' onChange={handleInputs} placeholder='example@mail.com' name='email' />
-            <TextField type='password' onChange={handleInputs} placeholder='******' name='password' />
+            <TextField type='email' {...register('email', { required: true })} placeholder='example@mail.com' name='email' error={errors.email} />
+            <TextField
+              type='password' {...register('password', { required: true, minLength: 6 })} placeholder='******'
+              helperText={errors.password && 'min 6 characters'} error={errors.password}
+            />
             <FormControl fullWidth>
               <InputLabel id='demo-simple-select-label'>Type of user</InputLabel>
               <Select
                 labelId='demo-simple-select-label'
                 id='demo-simple-select'
                 name='userType'
-                value={value.userType}
                 label='Type of user'
-                onChange={handleInputs}
+                {...register('userType', { required: true })}
+                error={errors.userType}
               >
                 <MenuItem value='students'>Students</MenuItem>
                 <MenuItem value='teachers'>Teachers</MenuItem>

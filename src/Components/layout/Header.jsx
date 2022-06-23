@@ -18,9 +18,8 @@ export default function Header () {
     logout()
     navigate('/login')
   }
-
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <>
       <AppBar position='static'>
         <Toolbar>
           <Grid container padding={1} direction={matches ? 'row' : 'column'}>
@@ -41,6 +40,7 @@ export default function Header () {
       <Box sx={{ display: 'inline-block', width: '100%' }}>
         {stateS.state.loading || stateQ.state.loading ? (<BarLoader />) : null}
       </Box>
-    </Box>
+    </>
+
   )
 }
