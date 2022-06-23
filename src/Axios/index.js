@@ -1,6 +1,6 @@
 import axios from 'axios'
 export const clientAxios = axios.create({
-  baseURL: 'http://localhost:4000/'
+  baseURL: 'https://proyectopnfibackend.onrender.com'
 })
 export const tokenAuth = (token) => {
   if (token) {
