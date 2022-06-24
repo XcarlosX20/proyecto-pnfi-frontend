@@ -1,4 +1,4 @@
-import { GET_USER_START, LOGIN_SUCCESS, REGISTER_SUCCESS, LOGIN_ERROR, REGISTER_ERROR, LOGOUT, GET_USER_SUCCESS, GET_USER_ERROR } from '../../Types'
+import { GET_USER_START, LOGIN_SUCCESS, REGISTER_SUCCESS, LOGIN_ERROR, REGISTER_ERROR, LOGOUT, GET_USER_SUCCESS, GET_USER_ERROR, LOGIN_START } from '../../Types'
 export const AuthReducer = (state, action) => {
   switch (action.type) {
     case REGISTER_SUCCESS:
@@ -16,19 +16,20 @@ export const AuthReducer = (state, action) => {
       return {
         ...state, user: action.payload, auth: true, loading: false
       }
+    case LOGIN_START:
     case GET_USER_START:
-      return { ...state, loading: action.payload }
+      return { ...state, loading: true }
     case LOGOUT:
     case LOGIN_ERROR:
     case REGISTER_ERROR:
       localStorage.clear()
-      return {
+      return {...state,
         alertAuth: action.payload || null,
         auth: null,
         token: null,
-        user: { _id: '', name: '', email: '' }
+        user: { _id: '', name: '', email: '' },
+        loading: false
       }
-
     default:
       return state
   }

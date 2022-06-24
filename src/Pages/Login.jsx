@@ -1,12 +1,13 @@
-import { Container, Stack, TextField, Button, Select, InputLabel, FormControl, MenuItem, Typography } from '@mui/material'
+import { Container, Stack, TextField, Button, Select, InputLabel, FormControl, MenuItem, Box } from '@mui/material'
 import { useContext, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import authContext from '../Context/Auth/AuthContext'
 import { useForm } from 'react-hook-form'
+import BarLoader from '../Components/ui/BarLoader'
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const navigate = useNavigate()
-  const { auth, login } = useContext(authContext)
+  const {loading, auth, login } = useContext(authContext)
   useEffect(() => {
     if (auth) {
       navigate('/home', { replace: true })
@@ -18,6 +19,9 @@ const Login = () => {
   }
   return (
     <>
+      <Box sx={{ display: 'inline-block', width: '99%' }}>
+        {loading ? (<BarLoader />) : null}
+      </Box>
       <Container>
         <h3>Log in</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -43,10 +47,9 @@ const Login = () => {
             </FormControl>
           </Stack>
           <Stack sx={{ marginTop: '1rem' }} direction='row' spacing={2}>
-            <Button variant='contained' type='submit'>Login</Button>
-            <Button> <Link to='/sign-in'>Get an account</Link></Button>
+            <Button disabled={loading} variant='contained' type='submit'>Login</Button>
+            <Button><Link to='/sign-in'>Get an account</Link></Button>
           </Stack>
-
         </form>
       </Container>
     </>

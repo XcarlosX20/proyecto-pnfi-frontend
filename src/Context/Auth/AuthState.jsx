@@ -1,6 +1,6 @@
 import { useReducer } from 'react'
 import { clientAxios, tokenAuth } from '../../Axios'
-import { GET_USER_SUCCESS, GET_USER_START, GET_USER_ERROR, LOGIN_SUCCESS, REGISTER_SUCCESS, LOGIN_ERROR, REGISTER_ERROR, LOGOUT } from '../../Types'
+import { GET_USER_SUCCESS, GET_USER_START, GET_USER_ERROR, LOGIN_SUCCESS, REGISTER_SUCCESS, LOGIN_ERROR, REGISTER_ERROR, LOGOUT, LOGIN_START } from '../../Types'
 import authContext from './AuthContext'
 import { AuthReducer } from './AuthReducer'
 import Swal from 'sweetalert2/dist/sweetalert2.all.js'
@@ -44,7 +44,6 @@ const AuthState = ({ children }) => {
         })
       }
     } catch (error) {
-      console.log(error)
       const alert = {
         msg: error.response.msg || 'there was an error',
         category: 'alert-error'
@@ -54,6 +53,7 @@ const AuthState = ({ children }) => {
     }
   }
   const login = async (email, password, userType) => {
+    dispatch({ type: LOGIN_START})
     try {
       const response = await clientAxios.post(`/api/${userType}/auth`, { email, password })
       const token = response.data.token

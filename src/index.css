@@ -27,6 +27,7 @@ table td, th {
   background-color: orange;
   float: left;
   height: 0.2rem;
+  margin: 0;
 }
 footer{
    margin-top: auto;
